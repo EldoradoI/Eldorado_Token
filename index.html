@@ -1,65 +1,173 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eldorado Token | ELD</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eldorado Token</title>
   <style>
+    :root {
+      --gold: #f5d76e;
+      --black: #1a1a1a;
+      --gray: #2e2e2e;
+      --white: #f9f9f9;
+      --blue: #3b82f6;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #f4f4f4;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, var(--black), var(--gray));
+      color: var(--white);
+    }
+    header {
+      background: var(--black);
+      padding: 20px;
       text-align: center;
-      padding: 2rem;
+      border-bottom: 3px solid var(--gold);
     }
-    h1 {
-      color: #fcd535;
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: var(--gold);
     }
-    a {
-      color: #fcd535;
-      text-decoration: none;
+    nav {
+      text-align: center;
+      padding: 10px;
+      background: var(--gray);
     }
-    .section {
-      margin: 3rem 0;
+    nav button {
+      background: var(--gold);
+      border: none;
+      margin: 0 5px;
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h2 {
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 5px;
     }
     .button {
       display: inline-block;
-      background-color: #fcd535;
-      color: #111;
-      padding: 0.75rem 1.5rem;
-      margin-top: 1rem;
-      border-radius: 5px;
+      background: var(--gold);
+      color: #000;
+      padding: 12px 25px;
+      margin: 20px 0;
+      border-radius: 6px;
       font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
     }
     .button:hover {
-      background-color: #fff176;
+      background: #e0c34a;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #444;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+      });
+    }
+    window.onload = () => switchLang('uk');
+  </script>
 </head>
 <body>
+
+<header>
   <h1>Eldorado Token (ELD)</h1>
+</header>
 
-  <div class="section">
-    <p><strong>Я звичайний хлопець з України</strong>, який працює монтажником на суднобудівництві в Польщі. Я вперто йшов уперед, падав і вставав, без грошей, без підтримки, але з вірою в себе.</p>
-    <p>Я створив <strong>Eldorado Token</strong> не як спосіб швидко заробити, а як символ сили, гідності та розвитку — для таких, як я. Якщо ти вірив у себе, не здався, і борешся за своє — цей токен для тебе.</p>
-    <p>Зараз ELD існує як вільний токен на Binance Smart Chain. У майбутньому я планую дати йому більше значення — можливо, знижки, дропи, доступ до контенту, або навіть власну спільноту.</p>
-    <p><strong>Це не про хайп. Це про шлях звичайної людини, яка будує своє Eldorado.</strong></p>
-    <p>Total Supply: <strong>1,000,000 ELD</strong></p>
-    <p>Network: Binance Smart Chain (BEP-20)</p>
-    <p>Contract Address: <a href="https://bscscan.com/token/0x998a2E0A9f76A73223bF1634B611cb3fcda4Ee72" target="_blank">0x998a2E...</a></p>
-  </div>
+<nav>
+  <button onclick="switchLang('uk')">Українська</button>
+  <button onclick="switchLang('en')">English</button>
+</nav>
 
-  <div class="section">
-    <h2>Документи</h2>
-    <p><a href="Eldorado_Whitepaper.pdf" target="_blank">Whitepaper (українською)</a></p>
-    <p><a href="image2vector.svg" target="_blank">Завантажити логотип</a></p>
-  </div>
+<section data-lang="uk">
+  <h2>Що таке Eldorado?</h2>
+  <p>
+    Eldorado — це не просто токен. Це експеримент. Це рух. Це відповідь на бажання створити щось своє — без готової формули, але з напрямком.
+    Ми не обіцяємо прибутків. Ми не обіцяємо чудес. Але ми пропонуємо приєднатись до простого, чесного початку.
+  </p>
+</section>
 
-  <div class="section">
-    <h2>Контакт</h2>
-    <p>Email: <a href="mailto:evan.engels1995@gmail.com">evan.engels1995@gmail.com</a></p>
-    <p><a href="index-en.html">English version</a></p>
-    <a class="button" href="https://t.me/ELD_token" target="_blank">Join Telegram</a>
-  </div>
+<section data-lang="en">
+  <h2>What is Eldorado?</h2>
+  <p>
+    Eldorado is not just a token. It's an experiment. A movement. A response to the desire to create something of your own — with no fixed formula, but with direction.
+    We promise no profits, no miracles. But we offer a simple, honest beginning.
+  </p>
+</section>
+
+<section data-lang="uk">
+  <h2>Роздача (Airdrop)</h2>
+  <p>
+    Перші учасники можуть отримати <strong>20 ELD</strong> безкоштовно.
+    Просто залиш свою BEP-20 адресу через форму нижче. Це наш перший крок.
+  </p>
+  <a class="button" href="https://forms.gle/Mo16ZJuTrJTWLKAg7" target="_blank">Заповнити форму</a>
+</section>
+
+<section data-lang="en">
+  <h2>Airdrop</h2>
+  <p>
+    Early participants can claim <strong>20 ELD</strong> for free.
+    Just submit your BEP-20 address via the form below. This is our first step.
+  </p>
+  <a class="button" href="https://forms.gle/Mo16ZJuTrJTWLKAg7" target="_blank">Fill the form</a>
+</section>
+
+<section data-lang="uk">
+  <h2>Дорожня карта (Roadmap)</h2>
+  <ul>
+    <li>✅ Травень — запуск токена, верифікація, роздача</li>
+    <li>⬜ Червень — лістинг CoinGecko, TrustWallet</li>
+    <li>⬜ Липень — голосування серед перших холдерів</li>
+    <li>⬜ Серпень — перше практичне використання токена</li>
+  </ul>
+</section>
+
+<section data-lang="en">
+  <h2>Roadmap</h2>
+  <ul>
+    <li>✅ May — token launch, verification, airdrop</li>
+    <li>⬜ June — CoinGecko, TrustWallet listing</li>
+    <li>⬜ July — community voting among early holders</li>
+    <li>⬜ August — first real use of the token</li>
+  </ul>
+</section>
+
+<section data-lang="uk">
+  <h2>Контакти</h2>
+  <p>
+    Telegram: <a href="https://t.me/ELD_token" target="_blank">@ELD_token</a><br>
+    Twitter: <a href="https://twitter.com/TokenEldor52611" target="_blank">@TokenEldor52611</a>
+  </p>
+</section>
+
+<section data-lang="en">
+  <h2>Contacts</h2>
+  <p>
+    Telegram: <a href="https://t.me/ELD_token" target="_blank">@ELD_token</a><br>
+    Twitter: <a href="https://twitter.com/TokenEldor52611" target="_blank">@TokenEldor52611</a>
+  </p>
+</section>
+
+<footer>
+  &copy; 2025 Eldorado Token — створено з вірою у власну силу
+</footer>
+
 </body>
 </html>
