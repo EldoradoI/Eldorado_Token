@@ -4,47 +4,87 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eldorado Token (ELD)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0e0e0e;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0f0f0f;
       color: #f5f5f5;
-      scroll-behavior: smooth;
+      line-height: 1.6;
     }
     header {
-      background: #1a1a1a;
-      padding: 1rem;
+      background: #151515;
+      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
     .logo {
       display: flex;
       align-items: center;
     }
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
-    }
+    .logo img { height: 50px; margin-right: 15px; }
     .lang-switcher button {
-      margin: 0 0.25rem;
+      margin: 0 5px;
       background: gold;
       border: none;
-      padding: 0.5rem 1rem;
-      color: #000;
+      padding: 8px 16px;
       cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.3s;
+      font-weight: bold;
+      border-radius: 4px;
     }
-    .lang-switcher button:hover {
-      background: #e6c200;
+    .social-links a {
+      margin: 0 8px;
+      color: gold;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(to bottom right, #1c1c1c, #292929);
+    }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 20px; color: gold; }
+    .hero p { font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero a {
+      background: gold;
+      color: black;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
     }
     section {
-      padding: 3rem 1rem;
+      padding: 60px 20px;
       max-width: 900px;
       margin: auto;
+    }
+    .section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; color: gold; }
+    .tokenomics ul, .faq ul { list-style: none; padding: 0; }
+    .tokenomics li, .faq li { padding: 8px 0; }
+    .roadmap div { margin-bottom: 20px; }
+    .community-links {
       text-align: center;
+      margin-top: 40px;
+    }
+    .community-links a {
+      display: inline-block;
+      margin: 0 10px;
+      background: gold;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    footer {
+      background: #151515;
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #999;
     }
     .lang { display: none; }
     .visible { display: block; animation: fadeIn 0.5s ease-in; }
@@ -57,8 +97,12 @@
 <body>
   <header>
     <div class="logo">
-      <img src="image2vector.svg" alt="Eldorado Logo" />
-      <h1>Eldorado Token</h1>
+      <img src="image2vector.svg" alt="Eldorado Logo">
+      <h2>Eldorado Token</h2>
+    </div>
+    <div class="social-links">
+      <a href="https://t.me/ELD_token" target="_blank">Telegram</a>
+      <a href="https://twitter.com/TokenEldor52611" target="_blank">Twitter</a>
     </div>
     <div class="lang-switcher">
       <button onclick="setLang('ua')">UA</button>
@@ -67,71 +111,101 @@
     </div>
   </header>
 
-  <section>
-    <!-- UA -->
+  <section class="hero">
     <div class="lang ua">
-      <h2>Про Eldorado (ELD)</h2>
-      <p>Eldorado — це токен нового покоління, створений для спільноти, яка будує майбутнє разом.</p>
-      <p>Приєднуйся до роздачі токенів вже зараз!</p>
+      <h1>Твій шлях починається тут</h1>
+      <p>Eldorado — токен, створений не для мас. А для тих, хто хоче створити щось справжнє.</p>
+      <a href="https://forms.gle/Mo16ZJuTrJTWLKAg7" target="_blank">Долучитись до роздачі</a>
     </div>
-
-    <!-- EN -->
     <div class="lang en">
-      <h2>About Eldorado (ELD)</h2>
-      <p>Eldorado is a next-generation token created for a community that builds the future together.</p>
-      <p>Join the token airdrop now!</p>
+      <h1>Your journey starts here</h1>
+      <p>Eldorado is a token not for everyone — but for those who want to build something real.</p>
+      <a href="https://forms.gle/Mo16ZJuTrJTWLKAg7" target="_blank">Join the Airdrop</a>
     </div>
-
-    <!-- RU -->
     <div class="lang ru">
-      <h2>О Eldorado (ELD)</h2>
-      <p>Eldorado — это токен нового поколения, созданный для сообщества, которое вместе строит будущее.</p>
-      <p>Присоединяйся к airdrop прямо сейчас!</p>
+      <h1>Твой путь начинается здесь</h1>
+      <p>Eldorado — токен не для всех, а для тех, кто хочет создавать настоящее.</p>
+      <a href="https://forms.gle/Mo16ZJuTrJTWLKAg7" target="_blank">Принять участие в раздаче</a>
     </div>
   </section>
 
   <section>
-    <!-- Airdrop info -->
-    <div class="lang ua">
-      <h3>Як отримати токени?</h3>
-      <p>Заповни форму, підпишись на Telegram і Twitter — і отримай ELD безкоштовно.</p>
+    <h2 class="section-title">Tokenomics</h2>
+    <div class="tokenomics lang ua visible">
+      <ul>
+        <li>70% — Спільнота та airdrop</li>
+        <li>15% — Розвиток проекту</li>
+        <li>10% — Ліквідність</li>
+        <li>5% — Команда</li>
+      </ul>
     </div>
-    <div class="lang en">
-      <h3>How to get tokens?</h3>
-      <p>Fill out the form, follow us on Telegram and Twitter — and receive free ELD tokens.</p>
+    <div class="tokenomics lang en">
+      <ul>
+        <li>70% — Community & Airdrop</li>
+        <li>15% — Project Development</li>
+        <li>10% — Liquidity</li>
+        <li>5% — Team</li>
+      </ul>
     </div>
-    <div class="lang ru">
-      <h3>Как получить токены?</h3>
-      <p>Заполни форму, подпишись на Telegram и Twitter — и получи ELD бесплатно.</p>
+    <div class="tokenomics lang ru">
+      <ul>
+        <li>70% — Сообщество и airdrop</li>
+        <li>15% — Развитие проекта</li>
+        <li>10% — Ликвидность</li>
+        <li>5% — Команда</li>
+      </ul>
     </div>
   </section>
 
   <section>
-    <div class="lang ua">
-      <h3>Приєднуйся до нас</h3>
-      <p>
-        <a href="https://t.me/ELD_token" target="_blank">Telegram</a> |
-        <a href="https://twitter.com/TokenEldor52611" target="_blank">Twitter</a> |
-        <a href="https://medium.com" target="_blank">Medium</a>
-      </p>
+    <h2 class="section-title">Roadmap</h2>
+    <div class="roadmap lang ua visible">
+      <div><strong>Q2 2025:</strong> Старт проєкту, сайт, роздача</div>
+      <div><strong>Q3 2025:</strong> Trust Wallet, CoinGecko, спільнота</div>
+      <div><strong>Q4 2025:</strong> NFT-інтеграція, DAO</div>
     </div>
-    <div class="lang en">
-      <h3>Join the community</h3>
-      <p>
-        <a href="https://t.me/ELD_token" target="_blank">Telegram</a> |
-        <a href="https://twitter.com/TokenEldor52611" target="_blank">Twitter</a> |
-        <a href="https://medium.com" target="_blank">Medium</a>
-      </p>
+    <div class="roadmap lang en">
+      <div><strong>Q2 2025:</strong> Launch, website, airdrop</div>
+      <div><strong>Q3 2025:</strong> Trust Wallet, CoinGecko, community</div>
+      <div><strong>Q4 2025:</strong> NFT utilities, DAO setup</div>
     </div>
-    <div class="lang ru">
-      <h3>Присоединяйся к нам</h3>
-      <p>
-        <a href="https://t.me/ELD_token" target="_blank">Telegram</a> |
-        <a href="https://twitter.com/TokenEldor52611" target="_blank">Twitter</a> |
-        <a href="https://medium.com" target="_blank">Medium</a>
-      </p>
+    <div class="roadmap lang ru">
+      <div><strong>Q2 2025:</strong> Старт проекта, сайт, раздача</div>
+      <div><strong>Q3 2025:</strong> Trust Wallet, CoinGecko, сообщество</div>
+      <div><strong>Q4 2025:</strong> NFT-функции, DAO</div>
     </div>
   </section>
+
+  <section>
+    <h2 class="section-title">FAQ</h2>
+    <div class="faq lang ua visible">
+      <ul>
+        <li><strong>Що таке Eldorado?</strong> — це токен спільноти з прозорими намірами</li>
+        <li><strong>Чи буде він на біржах?</strong> — у майбутньому так</li>
+      </ul>
+    </div>
+    <div class="faq lang en">
+      <ul>
+        <li><strong>What is Eldorado?</strong> — A community token with a transparent mission</li>
+        <li><strong>Will it be on exchanges?</strong> — Yes, in the future</li>
+      </ul>
+    </div>
+    <div class="faq lang ru">
+      <ul>
+        <li><strong>Что такое Eldorado?</strong> — токен сообщества с прозрачной целью</li>
+        <li><strong>Будет ли он на биржах?</strong> — Да, в будущем</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="community-links">
+    <a href="https://t.me/ELD_token" target="_blank">Join Telegram</a>
+    <a href="https://twitter.com/TokenEldor52611" target="_blank">Follow Twitter</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Eldorado Token. Built by the community. All rights reserved.</p>
+  </footer>
 
   <script>
     function setLang(lang) {
