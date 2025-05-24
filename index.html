@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Eldorado Token (ELD) is a BEP-20 cryptocurrency built on Binance Smart Chain. Designed for real people, with locked liquidity and community governance." />
@@ -9,19 +8,15 @@
   <meta name="author" content="Ivan Engels" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://eldoradotoken.com/" />
-  
-  <!-- Open Graph for social preview -->
   <meta property="og:title" content="Eldorado Token (ELD)" />
   <meta property="og:description" content="BEP-20 token on Binance Smart Chain with locked liquidity and DAO utility." />
   <meta property="og:url" content="https://eldoradotoken.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://eldoradotoken.com/logo.png" /> <!-- заміни на актуальний логотип -->
-
+  <meta property="og:image" content="https://eldoradotoken.com/logo.png" />
   <title>Eldorado Token (ELD) – BEP-20 Crypto on Binance Smart Chain</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-    
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
     body {
@@ -72,6 +67,11 @@
       margin: 0.5rem 0;
     }
     a { color: #80ffe3; }
+    #wallet, #eld-balance {
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -140,6 +140,13 @@
     <a class="btn" href="https://t.me/EldToolsBot" target="_blank">Use EldToolsBot</a>
   </section>
 
+  <section id="connect">
+    <h2>Connect Wallet</h2>
+    <button class="btn" onclick="connectWallet()">🔗 Connect Wallet</button>
+    <div id="wallet"></div>
+    <div id="eld-balance"></div>
+  </section>
+
   <section id="contact">
     <h2>Contact</h2>
     <p>Email: info@eldoradotoken.com</p>
@@ -148,5 +155,34 @@
   <footer>
     <p>© 2025 Eldorado Token. All rights reserved.</p>
   </footer>
+
+  <script>
+    const ELD_CONTRACT = "0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72";
+    const ABI = [
+      "function balanceOf(address owner) view returns (uint256)",
+      "function decimals() view returns (uint8)"
+    ];
+
+    async function connectWallet() {
+      if (!window.ethereum) {
+        alert("Please install MetaMask.");
+        return;
+      }
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+
+      document.getElementById("wallet").innerText = "Wallet: " + address;
+
+      const contract = new ethers.Contract(ELD_CONTRACT, ABI, provider);
+      const rawBalance = await contract.balanceOf(address);
+      const decimals = await contract.decimals();
+      const formattedBalance = ethers.utils.formatUnits(rawBalance, decimals);
+
+      document.getElementById("eld-balance").innerText = "ELD Balance: " + formattedBalance;
+    }
+  </script>
 </body>
 </html>
