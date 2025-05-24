@@ -195,18 +195,25 @@
     }
 
     async function checkNFT() {
-      if (!userAddress) {
-        alert("Please connect your wallet first.");
-        return;
-      }
-      const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, provider);
-      const balance = await nft.balanceOf(userAddress, NFT_ID);
-      if (balance.gt(0)) {
-        document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001";
-      } else {
-        document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet.";
-      }
-    }
+  if (!window.ethereum) {
+    alert("Please install MetaMask.");
+    return;
+  }
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const address = await signer.getAddress();
+
+  const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, provider);
+  const balance = await nft.balanceOf(address, NFT_ID);
+
+  if (balance.gt(0)) {
+    document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001";
+  } else {
+    document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet.";
+  }
+}
+
   </script>
 </body>
 </html>
