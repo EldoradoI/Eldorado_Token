@@ -101,33 +101,33 @@
       <li>Contract: 0x998a2E0A9f76A73223bF1634B611cb3fcda4Ee72</li>
     </ul>
   </section>
-<section id="roadmap">
-  <h2>Roadmap</h2>
-  <ul>
-    <li>Q2 2025 – Token launch, website, audit, bot</li>
-    <li>Q3 2025 – CoinGecko/CMC listing, 500+ holders</li>
-    <li>Q4 2025 – NFT utility, community governance</li>
-  </ul>
-</section>
 
-<section id="team">
-  <h2>Team</h2>
-  <p>Project founded by Ivan Engels — independent builder and crypto enthusiast. Contact:</p>
-  <a href="https://www.linkedin.com/in/ivan-engels-26202a343/" target="_blank">LinkedIn Profile</a>
-</section>
+  <section id="roadmap">
+    <h2>Roadmap</h2>
+    <ul>
+      <li>Q2 2025 – Token launch, website, audit, bot</li>
+      <li>Q3 2025 – CoinGecko/CMC listing, 500+ holders</li>
+      <li>Q4 2025 – NFT utility, community governance</li>
+    </ul>
+  </section>
 
-<section id="audit">
-  <h2>Audit & Security</h2>
-  <p>Smart contract verified on BscScan. Audited via TokenSniffer (score: 100/100).</p>
-  <p>Liquidity locked until Nov 2025 via PinkLock: <a href="https://www.pinksale.finance/pinklock/bsc/record/1319312" target="_blank">View Lock</a></p>
-</section>
+  <section id="team">
+    <h2>Team</h2>
+    <p>Project founded by Ivan Engels — independent builder and crypto enthusiast. Contact:</p>
+    <a href="https://www.linkedin.com/in/ivan-engels-26202a343/" target="_blank">LinkedIn Profile</a>
+  </section>
 
-<section id="whitepaper">
-  <h2>Whitepaper</h2>
-  <p>Our full whitepaper is available for download as a PDF and will soon be integrated into the website in full HTML format for better accessibility.</p>
-  <p><a class="btn" href="https://eldoradoi.github.io/Eldorado_Token/Eldorado_Whitepaper_EN.pdf" target="_blank">Download Whitepaper (PDF)</a></p>
-</section>
+  <section id="audit">
+    <h2>Audit & Security</h2>
+    <p>Smart contract verified on BscScan. Audited via TokenSniffer (score: 100/100).</p>
+    <p>Liquidity locked until Nov 2025 via PinkLock: <a href="https://www.pinksale.finance/pinklock/bsc/record/1319312" target="_blank">View Lock</a></p>
+  </section>
 
+  <section id="whitepaper">
+    <h2>Whitepaper</h2>
+    <p>Our full whitepaper is available for download as a PDF and will soon be integrated into the website in full HTML format for better accessibility.</p>
+    <p><a class="btn" href="https://eldoradoi.github.io/Eldorado_Token/Eldorado_Whitepaper_EN.pdf" target="_blank">Download Whitepaper (PDF)</a></p>
+  </section>
   <section id="connect">
     <h2>Connect Wallet</h2>
     <button class="btn" onclick="connectWallet()">🔗 Connect Wallet</button>
@@ -152,121 +152,122 @@
   <footer>
     <p>© 2025 Eldorado Token. All rights reserved.</p>
   </footer>
-<script>
-  const ELD_CONTRACT = "0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72";
-  const NFT_CONTRACT = "0xd18688c5c931f0832a6cfd4e8183989047065327";
-  const NFT_ID = 1;
 
-  const ERC20_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function decimals() view returns (uint8)"
-  ];
-  const ERC1155_ABI = [
-    "function balanceOf(address account, uint256 id) view returns (uint256)"
-  ];
+  <script>
+    const ELD_CONTRACT = "0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72";
+    const NFT_CONTRACT = "0xd18688c5c931f0832a6cfd4e8183989047065327";
+    const NFT_ID = 1;
 
-  let provider, signer;
+    const ERC20_ABI = [
+      "function balanceOf(address owner) view returns (uint256)",
+      "function decimals() view returns (uint8)"
+    ];
+    const ERC1155_ABI = [
+      "function balanceOf(address account, uint256 id) view returns (uint256)"
+    ];
 
-  async function connectWallet() {
-    if (!window.ethereum) {
-      alert("Please install MetaMask.");
-      return;
+    let provider, signer;
+
+    async function connectWallet() {
+      if (!window.ethereum) {
+        alert("Please install MetaMask.");
+        return;
+      }
+
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      signer = provider.getSigner();
+      const userAddress = await signer.getAddress();
+
+      document.getElementById("wallet").innerText = "Wallet: " + userAddress;
+
+      const token = new ethers.Contract(ELD_CONTRACT, ERC20_ABI, provider);
+      const rawBalance = await token.balanceOf(userAddress);
+      const decimals = await token.decimals();
+      const formattedBalance = ethers.utils.formatUnits(rawBalance, decimals);
+
+      document.getElementById("eld-balance").innerText = "ELD Balance: " + formattedBalance;
+
+      await checkDAOEligibility();
     }
 
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    signer = provider.getSigner();
-    const userAddress = await signer.getAddress();
-
-    document.getElementById("wallet").innerText = "Wallet: " + userAddress;
-
-    const token = new ethers.Contract(ELD_CONTRACT, ERC20_ABI, provider);
-    const rawBalance = await token.balanceOf(userAddress);
-    const decimals = await token.decimals();
-    const formattedBalance = ethers.utils.formatUnits(rawBalance, decimals);
-
-    document.getElementById("eld-balance").innerText = "ELD Balance: " + formattedBalance;
-
-    await checkDAOEligibility(); // <- важливо
-  }
-
-  async function switchToPolygon() {
-    try {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x89' }],
-      });
-    } catch (error) {
-      if (error.code === 4902) {
+    async function switchToPolygon() {
+      try {
         await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: '0x89',
-            chainName: 'Polygon',
-            rpcUrls: ['https://polygon-rpc.com/'],
-            nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-            blockExplorerUrls: ['https://polygonscan.com/']
-          }]
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x89' }],
         });
+      } catch (error) {
+        if (error.code === 4902) {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{
+              chainId: '0x89',
+              chainName: 'Polygon",
+              rpcUrls: ['https://polygon-rpc.com/'],
+              nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+              blockExplorerUrls: ['https://polygonscan.com/']
+            }]
+          });
+        }
       }
     }
-  }
 
-  async function checkNFT() {
-    try {
-      await switchToPolygon();
-      const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
-      const polySigner = polyProvider.getSigner();
-      const address = await polySigner.getAddress();
+    async function checkNFT() {
+      try {
+        await switchToPolygon();
+        const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
+        const polySigner = polyProvider.getSigner();
+        const address = await polySigner.getAddress();
 
-      const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
-      const balance = await nft.balanceOf(address, NFT_ID);
+        const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
+        const balance = await nft.balanceOf(address, NFT_ID);
 
-      if (balance && balance.gt(0)) {
-        document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001 (Polygon)";
-      } else {
-        document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet (Polygon).";
+        if (balance && balance.gt(0)) {
+          document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001 (Polygon)";
+        } else {
+          document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet (Polygon).";
+        }
+      } catch (err) {
+        document.getElementById("nft-status").innerText = "⚠️ Error checking NFT.";
+        console.error("NFT check error:", err);
       }
-    } catch (err) {
-      document.getElementById("nft-status").innerText = "⚠️ Error checking NFT.";
-      console.error("NFT check error:", err);
     }
-  }
 
-  async function checkDAOEligibility() {
-    try {
-      const address = await signer.getAddress();
-      const eld = new ethers.Contract(ELD_CONTRACT, ERC20_ABI, provider);
-      const raw = await eld.balanceOf(address);
-      const decimals = await eld.decimals();
-      const balance = parseFloat(ethers.utils.formatUnits(raw, decimals));
+    async function checkDAOEligibility() {
+      try {
+        const address = await signer.getAddress();
+        const eld = new ethers.Contract(ELD_CONTRACT, ERC20_ABI, provider);
+        const raw = await eld.balanceOf(address);
+        const decimals = await eld.decimals();
+        const balance = parseFloat(ethers.utils.formatUnits(raw, decimals));
 
-      const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
-      const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
-      const nftBalance = await nft.balanceOf(address, NFT_ID);
+        const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
+        const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
+        const nftBalance = await nft.balanceOf(address, NFT_ID);
 
-      const eligible = (balance >= 8) || (nftBalance && nftBalance.gt(0));
+        const eligible = (balance >= 8) || (nftBalance && nftBalance.gt(0));
 
-      const daoBtn = document.getElementById("dao-btn");
-      const daoStatus = document.getElementById("dao-status");
+        const daoBtn = document.getElementById("dao-btn");
+        const daoStatus = document.getElementById("dao-status");
 
-      if (eligible) {
-        daoBtn.disabled = false;
-        daoBtn.innerText = "🗳 Join Eldorado DAO";
-        daoStatus.innerText = "✅ Access granted.";
-      } else {
-        daoBtn.disabled = true;
-        daoBtn.innerText = "🔒 Access for holders only";
-        daoStatus.innerText = "❌ You need at least 8 ELD or Vault Builder NFT to join.";
+        if (eligible) {
+          daoBtn.disabled = false;
+          daoBtn.innerText = "🗳 Join Eldorado DAO";
+          daoStatus.innerText = "✅ Access granted.";
+        } else {
+          daoBtn.disabled = true;
+          daoBtn.innerText = "🔒 Access for holders only";
+          daoStatus.innerText = "❌ You need at least 8 ELD or Vault Builder NFT to join.";
+        }
+      } catch (err) {
+        console.error("DAO check error:", err);
       }
-    } catch (err) {
-      console.error("DAO check error:", err);
     }
-  }
 
-  function goToDAO() {
-    window.location.href = "/dao.html";
-  }
-</script>
+    function goToDAO() {
+      window.location.href = "/dao.html";
+    }
+  </script>
 </body>
 </html>
