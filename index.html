@@ -194,28 +194,53 @@
     document.getElementById("eld-balance").innerText = "ELD Balance: " + formattedBalance;
   }
 
+  async function switchToPolygon() {
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x89' }],
+      });
+    } catch (error) {
+      if (error.code === 4902) {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: '0x89',
+            chainName: 'Polygon',
+            rpcUrls: ['https://polygon-rpc.com/'],
+            nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+            blockExplorerUrls: ['https://polygonscan.com/']
+          }]
+        });
+      } else {
+        console.error("Network switch error:", error);
+      }
+    }
+  }
+
   async function checkNFT() {
     try {
-      if (!provider || !signer) {
-        alert("Please connect your wallet first.");
-        return;
-      }
+      await switchToPolygon();
 
-      const userAddress = await signer.getAddress();
-      const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, provider);
-      const balance = await nft.balanceOf(userAddress, NFT_ID);
+      const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
+      const polySigner = polyProvider.getSigner();
+      const address = await polySigner.getAddress();
+
+      const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
+      const balance = await nft.balanceOf(address, NFT_ID);
 
       if (balance && balance.gt(0)) {
-        document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001";
+        document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001 (Polygon)";
       } else {
-        document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet.";
+        document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet (Polygon).";
       }
     } catch (err) {
       console.error("NFT check failed:", err);
-      document.getElementById("nft-status").innerText = "⚠️ Error checking NFT.";
+      document.getElementById("nft-status").innerText = "⚠️ Error checking NFT on Polygon.";
     }
   }
 </script>
+
 
 </body>
 </html>
