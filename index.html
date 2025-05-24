@@ -213,26 +213,31 @@
       }
     }
 
-    async function checkNFT() {
-      try {
-        await switchToPolygon();
-        const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
-        const polySigner = polyProvider.getSigner();
-        const address = await polySigner.getAddress();
+   async function checkNFT() {
+  try {
+    await switchToPolygon();
+    const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
+    const polySigner = polyProvider.getSigner();
+    const address = await polySigner.getAddress();
 
-        const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
-        const balance = await nft.balanceOf(address, NFT_ID);
+    const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
+    const balance = await nft.balanceOf(address, NFT_ID);
 
-        if (balance && balance.gt(0)) {
-          document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001 (Polygon)";
-        } else {
-          document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet (Polygon).";
-        }
-      } catch (err) {
-        document.getElementById("nft-status").innerText = "⚠️ Error checking NFT.";
-        console.error("NFT check error:", err);
-      }
+    if (balance && balance.gt(0)) {
+      document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001 (Polygon)";
+    } else {
+      document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet (Polygon).";
     }
+
+    // 🔥 ОНОВЛЕННЯ DAO доступу після NFT перевірки
+    await checkDAOEligibility();
+
+  } catch (err) {
+    document.getElementById("nft-status").innerText = "⚠️ Error checking NFT.";
+    console.error("NFT check error:", err);
+  }
+}
+
 
     async function checkDAOEligibility() {
       try {
