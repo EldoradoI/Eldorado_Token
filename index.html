@@ -158,62 +158,64 @@
   </footer>
 
   <script>
-    const ELD_CONTRACT = "0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72";
-    const NFT_CONTRACT = "0xd18688c5c931f0832a6cfd4e8183989047065327";
-    const NFT_ID = 1;
+  const ELD_CONTRACT = "0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72";
+  const NFT_CONTRACT = "0xd18688c5c931f0832a6cfd4e8183989047065327";
+  const NFT_ID = 1;
 
-    const ERC20_ABI = [
-      "function balanceOf(address owner) view returns (uint256)",
-      "function decimals() view returns (uint8)"
-    ];
+  const ERC20_ABI = [
+    "function balanceOf(address owner) view returns (uint256)",
+    "function decimals() view returns (uint8)"
+  ];
 
-    const ERC1155_ABI = [
-      "function balanceOf(address account, uint256 id) view returns (uint256)"
-    ];
+  const ERC1155_ABI = [
+    "function balanceOf(address account, uint256 id) view returns (uint256)"
+  ];
 
-    let provider, signer, userAddress;
+  let provider, signer;
 
-    async function connectWallet() {
-      if (!window.ethereum) {
-        alert("Please install MetaMask.");
+  async function connectWallet() {
+    if (!window.ethereum) {
+      alert("Please install MetaMask.");
+      return;
+    }
+
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    signer = provider.getSigner();
+    const userAddress = await signer.getAddress();
+
+    document.getElementById("wallet").innerText = "Wallet: " + userAddress;
+
+    const token = new ethers.Contract(ELD_CONTRACT, ERC20_ABI, provider);
+    const rawBalance = await token.balanceOf(userAddress);
+    const decimals = await token.decimals();
+    const formattedBalance = ethers.utils.formatUnits(rawBalance, decimals);
+
+    document.getElementById("eld-balance").innerText = "ELD Balance: " + formattedBalance;
+  }
+
+  async function checkNFT() {
+    try {
+      if (!provider || !signer) {
+        alert("Please connect your wallet first.");
         return;
       }
 
-      provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      signer = provider.getSigner();
-      userAddress = await signer.getAddress();
+      const userAddress = await signer.getAddress();
+      const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, provider);
+      const balance = await nft.balanceOf(userAddress, NFT_ID);
 
-      document.getElementById("wallet").innerText = "Wallet: " + userAddress;
-
-      const token = new ethers.Contract(ELD_CONTRACT, ERC20_ABI, provider);
-      const rawBalance = await token.balanceOf(userAddress);
-      const decimals = await token.decimals();
-      const formattedBalance = ethers.utils.formatUnits(rawBalance, decimals);
-
-      document.getElementById("eld-balance").innerText = "ELD Balance: " + formattedBalance;
+      if (balance && balance.gt(0)) {
+        document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001";
+      } else {
+        document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet.";
+      }
+    } catch (err) {
+      console.error("NFT check failed:", err);
+      document.getElementById("nft-status").innerText = "⚠️ Error checking NFT.";
     }
-
-    async function checkNFT() {
-  if (!window.ethereum) {
-    alert("Please install MetaMask.");
-    return;
   }
+</script>
 
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const address = await signer.getAddress();
-
-  const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, provider);
-  const balance = await nft.balanceOf(address, NFT_ID);
-
-  if (balance.gt(0)) {
-    document.getElementById("nft-status").innerText = "✅ You own Vault Builder NFT #001";
-  } else {
-    document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet.";
-  }
-}
-
-  </script>
 </body>
 </html>
