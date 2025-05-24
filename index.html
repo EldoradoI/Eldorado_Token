@@ -213,13 +213,17 @@
       }
     }
 
-   async function checkNFT() {
+  async function checkNFT() {
   try {
     await switchToPolygon();
-    const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
-    const polySigner = polyProvider.getSigner();
-    const address = await polySigner.getAddress();
 
+    // Окремий BSC-провайдер для DAO eligibility
+    const bscProvider = new ethers.providers.Web3Provider(window.ethereum);
+    const bscSigner = bscProvider.getSigner();
+    const address = await bscSigner.getAddress();
+
+    // Перевірка NFT в мережі Polygon
+    const polyProvider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
     const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
     const balance = await nft.balanceOf(address, NFT_ID);
 
@@ -229,7 +233,9 @@
       document.getElementById("nft-status").innerText = "❌ NFT #001 not found in wallet (Polygon).";
     }
 
-    // 🔥 ОНОВЛЕННЯ DAO доступу після NFT перевірки
+    // 🔁 ОНОВЛЕННЯ DAO-ПЕРЕВІРКИ — після NFT!
+    provider = bscProvider; // повертаємо правильний провайдер
+    signer = bscSigner;
     await checkDAOEligibility();
 
   } catch (err) {
@@ -237,6 +243,7 @@
     console.error("NFT check error:", err);
   }
 }
+
 
 
     async function checkDAOEligibility() {
