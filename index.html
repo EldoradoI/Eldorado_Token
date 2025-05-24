@@ -241,6 +241,61 @@
   }
 </script>
 
+  <section id="dao-access">
+  <h2>DAO Access</h2>
+  <p>Eldorado DAO is coming soon. Access is granted to holders of at least <strong>8 ELD</strong> or <strong>Vault Builder NFT #001</strong>.</p>
+  <button id="dao-btn" class="btn" onclick="goToDAO()" disabled>🔒 Access for holders only</button>
+  <div id="dao-status"></div>
+</section>
+
+<script>
+  async function checkDAOEligibility() {
+    try {
+      const address = await signer.getAddress();
+
+      // Check ELD balance on BSC
+      const eld = new ethers.Contract(ELD_CONTRACT, ERC20_ABI, provider);
+      const raw = await eld.balanceOf(address);
+      const decimals = await eld.decimals();
+      const balance = parseFloat(ethers.utils.formatUnits(raw, decimals));
+
+      // Check NFT on Polygon
+      const polyProvider = new ethers.providers.Web3Provider(window.ethereum);
+      const nft = new ethers.Contract(NFT_CONTRACT, ERC1155_ABI, polyProvider);
+      const nftBalance = await nft.balanceOf(address, NFT_ID);
+
+      const eligible = (balance >= 8) || (nftBalance && nftBalance.gt(0));
+
+      const daoBtn = document.getElementById("dao-btn");
+      const daoStatus = document.getElementById("dao-status");
+
+      if (eligible) {
+        daoBtn.disabled = false;
+        daoBtn.innerText = "🗳 Join Eldorado DAO";
+        daoStatus.innerText = "✅ Access granted.";
+      } else {
+        daoBtn.disabled = true;
+        daoBtn.innerText = "🔒 Access for holders only";
+        daoStatus.innerText = "❌ You need at least 8 ELD or Vault Builder NFT to join.";
+      }
+    } catch (e) {
+      console.error("DAO eligibility check error:", e);
+    }
+  }
+
+  function goToDAO() {
+    window.location.href = "/dao.html";
+  }
+
+  // Автоматично перевірити доступ при підключенні
+  window.addEventListener('load', () => {
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', () => checkDAOEligibility());
+    }
+  });
+</script>
+
+
 
 </body>
 </html>
