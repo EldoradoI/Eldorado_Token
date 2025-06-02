@@ -56,9 +56,36 @@
       margin-top: 1rem;
       font-weight: bold;
     }
+    #intro-video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
   </style>
+  
 </head>
 <body>
+  <div id="intro-video-container">
+  <video id="intro-video" autoplay muted>
+    <source src="20250529_1901_Mystical ELD Elegance_simple_compose_01jwefwas4e3cvx4g459z99fa0.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+<div id="main-content" style="display: none;">
   <header>
     <h1>Eldorado Token (ELD)</h1>
     <nav>
@@ -128,13 +155,6 @@
     <div id="dao-status"></div>
   </section>
 
-<section class="links">
-  <h2>Explore</h2>
-  <a class="btn" href="https://pancakeswap.finance/swap?outputCurrency=0x998a2E0A9f76A73223bF1634B611cb3fcda4Ee72" target="_blank">Buy on PancakeSwap</a>
-  <a class="btn" href="https://bscscan.com/token/0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72" target="_blank">BscScan</a>
-  <a class="btn" href="https://www.dextools.io/app/en/bnb/pair-explorer/0x0b359c02c2addf785e00e2b92adddc3173305e5c" target="_blank">DEXTools</a>
-
-<section class="links">
   <h2>Explore</h2>
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
 
@@ -159,7 +179,7 @@
   <footer>
     <p>© 2025 Eldorado Token. All rights reserved.</p>
   </footer>
-
+</div>
   <script>
     const ELD_CONTRACT = "0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72";
     const NFT_CONTRACT = "0xd18688c5c931f0832a6cfd4e8183989047065327";
@@ -234,5 +254,13 @@
       window.location.href = "dao.html";
     }
   </script>
+  <script>
+  const intro = document.getElementById("intro-video");
+  intro.onended = () => {
+    document.getElementById("intro-video-container").style.display = "none";
+    document.getElementById("main-content").style.display = "block";
+  };
+</script>
+
 </body>
 </html>
