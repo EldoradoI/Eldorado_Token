@@ -1,2 +1,106 @@
 <!DOCTYPE html>
-<html><head><title>Dashboard</title></head><body>Testing dashboard</body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eldorado Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 2rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #ffd700;
+    }
+    .link-list a {
+      display: block;
+      color: #00ffff;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+    }
+    .builder-list span {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .chart-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Eldorado Token Dashboard</h1>
+    
+  </header>
+
+  <main>
+    <div class="section">
+      <h2>📊 Live Stats</h2>
+      <p>Price: ~$0.0104</p>
+      <p>Holders: 12</p>
+      <p>Market Cap: ~$10,445</p>
+      <p>Liquidity: ~$11</p>
+      <p>Contract: 0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72</p>
+    </div>
+
+    <div class="section">
+      <h2>📈 View Price Chart</h2>
+      <a class="chart-button" href="https://www.dextools.io/app/en/bnb/pair-explorer/0x0b359c02c2addf785e00e2b92adddc3173305e5c" target="_blank">
+        Open DEXTools Chart
+      </a>
+    </div>
+
+    <div class="section">
+      <h2>🔗 Links</h2>
+      <div class="link-list">
+        <a href="https://eldoradotoken.com">Main Site</a>
+        <a href="https://t.me/eldproject">Telegram</a>
+        <a href="https://x.com/TokenEldor52611">Twitter</a>
+        <a href="https://bscscan.com/token/0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72">BscScan</a>
+        <a href="https://pancakeswap.finance/swap?outputCurrency=0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72">Buy on PancakeSwap</a>
+        <a href="https://tinyurl.com/3zjpy8tk">Builder Challenge Form</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🧱 Builder Wall</h2>
+      <div class="builder-list">
+        <span>@Женька</span>
+        <span>@crazy_ft</span>
+        <span>@Strawhate10</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🎨 Latest NFTs</h2>
+      <p>Check out the NFTs on <a href="https://opensea.io" target="_blank" style="color:#00ffff;">OpenSea</a>.</p>
+    </div>
+  </main>
+</body>
+</html>
