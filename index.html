@@ -84,10 +84,11 @@
 </head>
 <body>
   <div id="intro-video-container">
-    <video id="intro-video" autoplay muted>
-      <source src="20250529_1901_Mystical ELD Elegance_simple_compose_01jwefwas4e3cvx4g459z99fa0.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+ <video id="intro-video" autoplay muted playsinline>
+  <source src="20250529_1901_Mystical ELD Elegance_simple_compose_01jwefwas4e3cvx4g459z99fa0.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
   </div>
 
   <div id="main-content" style="display: none;">
@@ -261,7 +262,7 @@
     intro.onended = () => {
       document.getElementById("intro-video-container").style.display = "none";
       document.getElementById("main-content").style.display = "block";
-    };
+    },3000);
   </script>
 </body>
 </html>
