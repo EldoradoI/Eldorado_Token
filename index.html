@@ -258,11 +258,11 @@
       window.location.href = "dao.html";
     }
 
-    const intro = document.getElementById("intro-video");
-    intro.onended = () => {
-      document.getElementById("intro-video-container").style.display = "none";
-      document.getElementById("main-content").style.display = "block";
-    },3000);
+    setTimeout(() => {
+  document.getElementById("intro-video-container").style.display = "none";
+  document.getElementById("main-content").style.display = "block";
+}, 3000); 
+
   </script>
 </body>
 </html>
