@@ -61,27 +61,27 @@
 <body>
   <h1>Eldorado Missions</h1>
   <h2>Submit Your Mission Proof</h2>
-  <form action="https://formspree.io/f/myzjjekz" method="POST" enctype="multipart/form-data">
-    <label for="mission">Select Mission:</label>
-    <select id="mission" name="mission" required>
-      <option value="Photo with ELD logo">🏙 Photo with ELD logo in city</option>
-      <option value="Sticker in public place">📜 Sticker/leaflet drop</option>
-      <option value="Talk with investor">🧠 IRL talk with potential investor</option>
-      <option value="Wear ELD gear">🪪 ELD shirt in public</option>
-      <option value="Social media post">🌐 Social media awareness post</option>
-    </select>
+<form action="mailto:info@eldoradotoken.com" method="POST" enctype="text/plain">
+  <label for="mission">Select Mission:</label>
+  <select id="mission" name="mission" required>
+    <option value="Photo with ELD logo">🏙 Photo with ELD logo in city</option>
+    <option value="Sticker in public place">📜 Sticker/leaflet drop</option>
+    <option value="Talk with investor">🧠 IRL talk with investor</option>
+    <option value="Wear ELD gear">🪪 ELD shirt in public</option>
+    <option value="Social media post">🌐 Social media post</option>
+  </select>
 
-    <label for="wallet">Your Wallet Address (BSC or Polygon):</label>
-    <input type="text" id="wallet" name="wallet" required />
+  <label for="wallet">Your Wallet Address (BSC or Polygon):</label>
+  <input type="text" id="wallet" name="wallet" required />
 
-    <label for="proof">Upload your proof (photo/video):</label>
-    <input type="file" id="proof" name="proof" accept="image/*,video/*" required />
+  <label for="proof">Paste link to your proof (image/video):</label>
+  <input type="url" id="proof" name="proof" placeholder="https://..." required />
 
-    <label for="notes">Additional Notes (optional):</label>
-    <textarea id="notes" name="notes" rows="4"></textarea>
+  <label for="notes">Additional Notes (optional):</label>
+  <textarea id="notes" name="notes" rows="4"></textarea>
 
-    <button type="submit">Submit Mission</button>
-  </form>
+  <button type="submit">Submit Mission</button>
+</form>
 
   <div class="note">
     Your proof will be reviewed manually. Successful submissions will receive NFTs or ELD tokens.<br>
