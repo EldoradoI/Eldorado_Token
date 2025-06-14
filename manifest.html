@@ -21,9 +21,24 @@
       text-align: center;
       font-size: 1.5rem;
     }
+    #language-switcher {
+      text-align: center;
+      margin: 2rem auto;
+    }
+    .lang-btn {
+      background: #00ffc3;
+      color: #111;
+      border: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+      border-radius: 5px;
+    }
     section {
       max-width: 800px;
-      margin: 4rem auto;
+      margin: 2rem auto;
       padding: 2rem;
       background: rgba(0, 0, 0, 0.8);
       border-left: 5px solid #00ffc3;
@@ -62,46 +77,112 @@
   Eldorado Manifest
 </header>
 
+<div id="language-switcher">
+  <button class="lang-btn" onclick="showLang('en')">🇬🇧</button>
+  <button class="lang-btn" onclick="showLang('ua')">🇺🇦</button>
+  <button class="lang-btn" onclick="showLang('ru')">🇷🇺</button>
+  <button class="lang-btn" onclick="showLang('pl')">🇵🇱</button>
+</div>
+
 <section>
-  <h2>Eldorado Manifest</h2>
+  <div id="manifest-en" class="manifest-block">
+    <h2>Manifest</h2>
+    <p>Eldorado is not a token. Not an NFT. Not hype.</p>
+    <p>It’s a place for those who walked through lies but never became liars.<br>
+    For those who lost trust in others — but never lost themselves.<br>
+    For those who fell — but still reached upward.</p>
+    <p>We don’t sell promises. We don’t beg for belief.<br>
+    We just build. Quietly. Steadily. Without slogans.</p>
+    <p>Eldorado is silence — but inside it, there’s strength.<br>
+    It’s simplicity — but with depth.<br>
+    It’s a path — and not everyone will finish it.</p>
+    <p>In 2024, I gave to people. I gifted, when I didn’t have to.<br>
+    I ended up with over 60,000 PLN in debt. And I don’t regret it.<br>
+    Late November, people started whispering — about my talks, my flaws, my past.<br>
+    They told me I’d won something. That someone was waiting.<br>
+    But it was a lie. A trap. An attempt to break me.<br>
+    I didn’t break. Not because I was strong — but because I didn’t quit.<br>
+    This is my Eldorado.</p>
+    <p class="highlight">If you’re reading this and you feel it — you're already part of it.</p>
+  </div>
 
-  <p>
-    Eldorado is not a token. Not an NFT. Not hype.
-  </p>
-  <p>
-    It’s a place for those who walked through lies but never became liars.  
-    For those who lost trust in others — but never lost themselves.  
-    For those who fell — but still reached upward.
-  </p>
-  <p>
-    We don’t sell promises. We don’t beg for belief.  
-    We just build. Quietly. Steadily. Without slogans.
-  </p>
-  <p>
-    Eldorado is silence — but inside it, there’s strength.  
-    It’s simplicity — but with depth.  
-    It’s a path — and not everyone will finish it.
-  </p>
+  <div id="manifest-ua" class="manifest-block" style="display:none;">
+    <h2>Маніфест</h2>
+    <p>Eldorado — це не токен. І не NFT. І не хайп.</p>
+    <p>Це місце для тих, хто пройшов крізь брехню, але не став брехуном.<br>
+    Для тих, хто втратив довіру до інших — але не до себе.<br>
+    Для тих, хто падав — але все одно тягнувся вгору.</p>
+    <p>Ми не продаємо обіцянок. Ми не просимо віри.<br>
+    Ми просто будуємо. Тихо. Наполегливо. Без гасел.</p>
+    <p>Eldorado — це тиша. Але в ній є сила.<br>
+    Це простота — але з глибиною.<br>
+    Це шлях — і пройти його зможе не кожен.</p>
+    <p>У 2024 році я дарував людям речі, віддавав, коли міг не віддавати.<br>
+    Залишився з кредитом у 60 000 злотих. Я не жалію.<br>
+    Наприкінці листопада почали шепотіти — про мої розмови, мої помилки, минуле.<br>
+    Казали, що я щось виграв. Що десь мене чекають.<br>
+    Але це була пастка. Брехня. Спроба зламати мене.<br>
+    Я не зламався. Не тому, що був сильний — а тому що не здався.<br>
+    Це моє Eldorado.</p>
+    <p class="highlight">Якщо ти читаєш це і відчуваєш — ти вже частина.</p>
+  </div>
 
-  <p>
-    In 2024, I gave to people. I gifted, when I didn’t have to.  
-    I ended up with over 60,000 PLN in debt. And I don’t regret it.  
-    Late November, people started whispering — about my talks, my flaws, my past.  
-    They told me I’d won something. That someone was waiting.  
-    But it was a lie. A trap. An attempt to break me.  
-    I didn’t break. Not because I was strong — but because I didn’t quit.  
-    This is my Eldorado.
-  </p>
+  <div id="manifest-ru" class="manifest-block" style="display:none;">
+    <h2>Манифест</h2>
+    <p>Eldorado — это не токен. Не NFT. Не хайп.</p>
+    <p>Это место для тех, кто прошёл сквозь ложь, но не стал лжецом.<br>
+    Для тех, кто потерял доверие к другим — но не к себе.<br>
+    Для тех, кто падал — но всё равно тянулся вверх.</p>
+    <p>Мы не продаём обещания. Мы не просим веры.<br>
+    Мы просто строим. Тихо. Настойчиво. Без лозунгов.</p>
+    <p>Eldorado — это тишина. Но в ней — сила.<br>
+    Это простота — но с глубиной.<br>
+    Это путь — и не каждый его завершит.</p>
+    <p>В 2024 году я дарил людям вещи, отдавал, когда мог не отдавать.<br>
+    Остался с долгом в 60 000 злотых. Я не жалею.<br>
+    В конце ноября люди начали шептать — о моих разговорах, ошибках, прошлом.<br>
+    Говорили, что я что-то выиграл. Что где-то меня ждут.<br>
+    Но это была ложь. Ловушка. Попытка сломать.<br>
+    Я не сломался. Не потому что был сильным — а потому что не сдался.<br>
+    Это моё Eldorado.</p>
+    <p class="highlight">Если ты читаешь это и чувствуешь — ты уже часть этого.</p>
+  </div>
 
-  <p class="highlight">
-    If you’re reading this and you feel it — you're already part of it.
-  </p>
+  <div id="manifest-pl" class="manifest-block" style="display:none;">
+    <h2>Manifest</h2>
+    <p>Eldorado to nie token. Nie NFT. Nie hype.</p>
+    <p>To miejsce dla tych, którzy przeszli przez kłamstwo, ale nie stali się kłamcami.<br>
+    Dla tych, którzy stracili zaufanie do innych — ale nie do siebie.<br>
+    Dla tych, którzy upadli — ale nadal się podnosili.</p>
+    <p>Nie sprzedajemy obietnic. Nie prosimy o wiarę.<br>
+    Po prostu budujemy. Cicho. Wytrwale. Bez sloganów.</p>
+    <p>Eldorado to cisza — ale w niej jest siła.<br>
+    To prostota — ale z głębią.<br>
+    To droga — i nie każdy ją ukończy.</p>
+    <p>W 2024 roku dawałem ludziom. Oddawałem, choć nie musiałem.<br>
+    Zostałem z długiem ponad 60 000 złotych. Nie żałuję.<br>
+    Pod koniec listopada ludzie zaczęli szeptać — o moich rozmowach, błędach, przeszłości.<br>
+    Mówili, że coś wygrałem. Że ktoś na mnie czeka.<br>
+    Ale to było kłamstwo. Pułapka. Próba złamania.<br>
+    Nie złamałem się. Nie dlatego, że byłem silny — ale dlatego, że się nie poddałem.<br>
+    To moje Eldorado.</p>
+    <p class="highlight">Jeśli to czytasz i to czujesz — już jesteś częścią.</p>
+  </div>
 </section>
 
 <footer>
   <p>← <a href="index.html">Back to Main</a></p>
   <p>© 2025 Eldorado Token. Built with truth.</p>
 </footer>
+
+<script>
+  function showLang(lang) {
+    const langs = ['en', 'ua', 'ru', 'pl'];
+    langs.forEach(code => {
+      document.getElementById(`manifest-${code}`).style.display = (code === lang) ? 'block' : 'none';
+    });
+  }
+</script>
 
 </body>
 </html>
