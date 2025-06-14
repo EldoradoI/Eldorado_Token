@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eldorado Missions</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Orbitron', sans-serif;
@@ -60,32 +60,33 @@
 </head>
 <body>
   <h1>Eldorado Missions</h1>
-  <h2>Submit Your Mission Proof</h2>
-<form action="mailto:info@eldoradotoken.com" method="POST" enctype="text/plain">
-  <label for="mission">Select Mission:</label>
-  <select id="mission" name="mission" required>
-    <option value="Photo with ELD logo">🏙 Photo with ELD logo in city</option>
-    <option value="Sticker in public place">📜 Sticker/leaflet drop</option>
-    <option value="Talk with investor">🧠 IRL talk with investor</option>
-    <option value="Wear ELD gear">🪪 ELD shirt in public</option>
-    <option value="Social media post">🌐 Social media post</option>
-  </select>
+  <h2>Submit Your Mission Report</h2>
 
-  <label for="wallet">Your Wallet Address (BSC or Polygon):</label>
-  <input type="text" id="wallet" name="wallet" required />
+  <form action="mailto:info@eldoradotoken.com" method="POST" enctype="text/plain">
+    <label for="mission">Choose your mission:</label>
+    <select id="mission" name="Mission Type" required>
+      <option value="Photo with ELD logo">🏙 Photo with ELD logo in city</option>
+      <option value="Sticker in public place">📜 Sticker/leaflet drop</option>
+      <option value="Talk with investor">🧠 IRL talk with investor</option>
+      <option value="Wear ELD gear">🪪 ELD shirt in public</option>
+      <option value="Social media post">🌐 Social media post</option>
+    </select>
 
-  <label for="proof">Paste link to your proof (image/video):</label>
-  <input type="url" id="proof" name="proof" placeholder="https://..." required />
+    <label for="wallet">Your Wallet Address (BSC or Polygon):</label>
+    <input type="text" id="wallet" name="Wallet Address" required />
 
-  <label for="notes">Additional Notes (optional):</label>
-  <textarea id="notes" name="notes" rows="4"></textarea>
+    <label for="proof">Link to your proof (photo or video):</label>
+    <input type="url" id="proof" name="Proof Link" placeholder="https://imgur.com/..." required />
 
-  <button type="submit">Submit Mission</button>
-</form>
+    <label for="notes">Any notes (optional):</label>
+    <textarea id="notes" name="Notes" rows="4" placeholder="Details or impressions..."></textarea>
+
+    <button type="submit">Submit Mission</button>
+  </form>
 
   <div class="note">
-    Your proof will be reviewed manually. Successful submissions will receive NFTs or ELD tokens.<br>
-    Stay legendary.
+    Your email app will open — please send the message manually.<br />
+    Attach files if needed. Stay strong, Builder 🛡
   </div>
 </body>
 </html>
