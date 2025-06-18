@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eldorado DAO Gateway</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
     body {
       margin: 0;
       font-family: 'Orbitron', sans-serif;
@@ -45,6 +47,20 @@
       margin-top: 10px;
       font-size: 16px;
     }
+    .portal {
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px solid #00ffc3;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 12px;
+      text-align: center;
+      animation: portalOpen 2s ease forwards;
+    }
+    @keyframes portalOpen {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -70,6 +86,7 @@
     <p>Now, prove your right. Connect your wallet to verify.</p>
     <button class="btn" onclick="connectWallet()">Connect Wallet</button>
     <div id="status"></div>
+    <div id="portal" style="display:none;"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
@@ -113,6 +130,13 @@
 
       if (parseFloat(balance) >= REQUIRED_ELD) {
         document.getElementById('status').innerText = "✅ Access granted. Welcome to the DAO.";
+        document.getElementById('portal').style.display = "block";
+        document.getElementById('portal').className = "portal";
+        document.getElementById('portal').innerHTML = `
+          <h2>🌀 The Portal Opens</h2>
+          <p>You’ve earned your way in. Only few cross this threshold.</p>
+          <a href="https://t.me/eldproject" target="_blank" class="btn">🚪 Enter the Builder Chat</a>
+        `;
       } else {
         document.getElementById('status').innerText = "❌ You need at least 8 ELD to enter.";
       }
