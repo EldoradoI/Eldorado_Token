@@ -1,20 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Eldorado DAO</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eldorado DAO Gateway</title>
   <style>
     body {
-      background: #0f2027;
-      color: #00ffc3;
+      margin: 0;
       font-family: 'Orbitron', sans-serif;
-      text-align: center;
-      padding: 100px 20px;
+      background: black;
+      color: #00ffc3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .section {
+      display: none;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #00ffc3;
+      border-radius: 10px;
+      max-width: 500px;
+    }
+    .visible {
+      display: block;
+    }
+    .btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #00ffc3;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h1>🗳 Eldorado DAO — Coming Soon</h1>
-  <p>Access granted. Full DAO voting will launch in Q3 2025.</p>
+  <h1>Enter the DAO Gateway</h1>
+
+  <div id="step1" class="section visible">
+    <p><strong>Challenge 1:</strong> What is the one thing you cannot fake in Eldorado?</p>
+    <input type="text" id="answer1" placeholder="Your answer here...">
+    <button class="btn" onclick="checkStep1()">Submit</button>
+  </div>
+
+  <div id="step2" class="section">
+    <p><strong>Challenge 2:</strong> Find the hidden sigil 🧿 on this screen and click it.</p>
+    <span id="hiddenSigil" style="position:absolute; top:10%; left:90%; cursor:pointer;">🧿</span>
+  </div>
+
+  <div id="step3" class="section">
+    <p><strong>Challenge 3:</strong> Speak the oath: "I build not for glory, but because I must." Then click below.</p>
+    <button class="btn" onclick="unlockWeb3()">I accept the oath</button>
+  </div>
+
+  <div id="step4" class="section">
+    <p>Now, prove your right. Connect your wallet to verify.</p>
+    <button class="btn" onclick="connectWallet()">Connect Wallet</button>
+    <div id="status"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script>
+    const REQUIRED_ELD = 8;
+    const CONTRACT = "0x998a2e0a9f76a73223bf1634b611cb3fcda4ee72";
+    const ABI = ["function balanceOf(address owner) view returns (uint256)","function decimals() view returns (uint8)"];
+    let provider, signer;
+
+    function checkStep1() {
+      const ans = document.getElementById('answer1').value.trim().toLowerCase();
+      if (ans === 'truth') {
+        document.getElementById('step1').classList.remove('visible');
+        document.getElementById('step2').classList.add('visible');
+      } else {
+        alert('Wrong answer. Try again.');
+      }
+    }
+
+    document.getElementById('hiddenSigil').addEventListener('click', () => {
+      document.getElementById('step2').classList.remove('visible');
+      document.getElementById('step3').classList.add('visible');
+    });
+
+    function unlockWeb3() {
+      document.getElementById('step3').classList.remove('visible');
+      document.getElementById('step4').classList.add('visible');
+    }
+
+    async function connectWallet() {
+      if (!window.ethereum) return alert("MetaMask not found");
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      signer = provider.getSigner();
+      const address = await signer.getAddress();
+
+      const token = new ethers.Contract(CONTRACT, ABI, provider);
+      const rawBalance = await token.balanceOf(address);
+      const decimals = await token.decimals();
+      const balance = ethers.utils.formatUnits(rawBalance, decimals);
+
+      if (parseFloat(balance) >= REQUIRED_ELD) {
+        document.getElementById('status').innerText = "✅ Access granted. Welcome to the DAO.";
+      } else {
+        document.getElementById('status').innerText = "❌ You need at least 8 ELD to enter.";
+      }
+    }
+  </script>
 </body>
 </html>
